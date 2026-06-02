@@ -1,22 +1,41 @@
-{% extends "library_manager/base.html" %}
+{% extends "library_manager/home.html" %}
 
-{% block title_name %}List of {{ entity }}s{% endblock title_name %}
+{% block title_name %}List of {{ entity.title }}s{% endblock title_name %}
 
-{% block body %}
 
-<h1>list of {{ entity }}s will be shown here</h1>
 
-<table class="table">
+{% comment %} <div class='p-1 container d-flex flex-row bg-warning bg-opacity-50 shadow-lg border border-warning border-opacity-50 rounded-5'> {% endcomment %}
+{% block result %}
+
+<table class='table table-sm table-hover shadow'>
+  <thead>
     <tr>
-        <th scope="col">col1</th>
-        <th scope="col">col2</th>
-        <th scope="col">col3</th>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
     </tr>
     <tr>
-        <td scope="row">data1</th>
-        <td>data2</th>
-        <td>data3</th>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
     </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>John</td>
+      <td>Doe</td>
+      <td>@social</td>
+    </tr>
+  </tbody>
 </table>
 
-{% endblock body %}
+{% endblock result %}
