@@ -7,35 +7,56 @@
 {% comment %} <div class='p-1 container d-flex flex-row bg-warning bg-opacity-50 shadow-lg border border-warning border-opacity-50 rounded-5'> {% endcomment %}
 {% block result %}
 
+{% if entity == 'book' %}
 <table class='table table-sm table-hover shadow'>
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">{{ header.0 }}</th>
+      <th scope="col">{{ header.1 }}</th>
+      <th scope="col">{{ header.2 }}</th>
+      <th scope="col">{{ header.3 }}</th>
     </tr>
   </thead>
   <tbody class="table-group-divider">
+    {% for index, obj in data %}
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">index</th>
+      <td>obj.title</td>
+      <td>obj.published_date</td>
+      <td>obj.isbn</td>
+      <td>obj.authors</td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>John</td>
-      <td>Doe</td>
-      <td>@social</td>
-    </tr>
+    {% endfor %}
   </tbody>
 </table>
+{% endif %}
+
+{% if entity == 'author' %}
+<table class='table table-sm table-hover shadow'>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">{{ header.0 }}</th>
+      <th scope="col">{{ header.1 }}</th>
+      <th scope="col">{{ header.2 }}</th>
+      <th scope="col">{{ header.3 }}</th>
+      <th scope="col">{{ header.4 }}</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {% for index, obj in data %}
+    <tr>
+      <th scope="row">index</th>
+      <td>obj.first_name</td>
+      <td>obj.last_name</td>
+      <td>obj.age</td>
+      <td>obj.book_set</td>
+      <td>obj.book_set.count()</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
 
 {% endblock result %}
