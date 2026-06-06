@@ -5,15 +5,54 @@
 
 {% block result %}
 
-<div class='d-flex flex-row flex-wrap'>
-{% for id, type, label in fields %}
+<form method="post" class='form d-flex flex-row justify-content-evenly'>
+    {% csrf_token %}
 
-<div class="form-floating w-50">
-    <input type={{ type }} class="form-control shadow rounded-4" id="{{ id }}" placeholder="">
-    <label for="{{ id }}">{{ label }}</label>
-</div>
-    
-{% endfor %}
-</div>
+
+    <div class="row">
+        {% for type, label, name in inputs %}
+        <input type='{{ type }}' class="form-control bg-light bg-opacity-50 shadow border border-light rounded-4 my-1"
+            placeholder='{{ label }}' name='{{ name }}'>
+        {% endfor %}
+
+        <select name="{{ entity }}s"
+            class="form-select bg-light bg-opacity-50 shadow border border-light rounded-4 my-1" multiple
+            aria-label="Multiple select example">
+            {% for list_value in list_values %}
+            <option>{{ list_value }}</option>
+            {% endfor %}
+        </select>
+        <label class="text-start">Hold `Ctrl` or `Command` to select multiple items.</label>
+    </div>
+
+    <div class="container">
+        <input type="submit" value="add" name="add"
+            class="btn bg-light bg-opacity-50 shadow border border-light rounded-3 w-75 my-1">
+
+    </div>
+</form>
 
 {% endblock result %}
+
+
+
+<!-- <form method='post' action='{% url "lib_mngr:add" entity=entity %}' class='form d-flex flex-column align-items-start'>
+    {% csrf_token %}
+    
+    {% comment %} <div class='container'> {% endcomment %}
+    {% for id, type, label in fields %}
+    {% comment %} <div class="form-floating"> {% endcomment %}
+    <input type={{ type }} class="form-control my-3 bg-light bg-opacity-75 shadow-sm border border-light rounded-4" id="{{ id }}" placeholder="">
+    <label name={{ label }} for="{{ id }}">{{ label }}</label>
+    {% comment %} </div> {% endcomment %}
+    {% endfor %}
+    {% comment %} </div> {% endcomment %}
+
+    {% comment %} <div class='form d-flex flex-column w-50'> {% endcomment %}
+    <input type='submit' value='Add {{ entity.title }}'>
+    <a>Add</a>
+    <a>Search on {{ fields.0.2 }}</a>
+    <a>Update</a>
+    {% comment %} </div> {% endcomment %}
+
+</form> -->
